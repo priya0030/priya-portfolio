@@ -1,0 +1,144 @@
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  padding: 3rem 6rem;
+  background: var(--bg, #0f1222);
+  color: var(--text, #fff);
+  gap: 4rem;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 50%;
+}
+
+.hero-text h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--brand, #6c5ce7);
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--muted, #a8a8c5);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn.primary {
+  background: var(--brand, #6c5ce7);
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: var(--brand-2, #a29bfe);
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 1px solid var(--brand, #6c5ce7);
+  color: var(--brand, #6c5ce7);
+}
+
+.btn.secondary:hover {
+  background: var(--brand, #6c5ce7);
+  color: #fff;
+}
+
+/* Profile Section */
+.hero-profile {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-wrapper {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.4);
+}
+
+/* Rings */
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  animation: rotate 12s linear infinite;
+}
+
+.ring1 {
+  width: 280px;
+  height: 280px;
+  border-image: linear-gradient(90deg, #6c5ce7, transparent) 1;
+}
+
+.ring2 {
+  width: 320px;
+  height: 320px;
+  border-image: linear-gradient(90deg, #a29bfe, transparent) 1;
+  animation-duration: 18s;
+}
+
+.ring3 {
+  width: 360px;
+  height: 360px;
+  border-image: linear-gradient(90deg, #00cec9, transparent) 1;
+  animation-duration: 24s;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+}
