@@ -2,10 +2,10 @@ export const profile = {
   name: "Priya Dobariya",
   tagline: "Senior Android & Flutter Developer • M.S. CS @ UAB",
   location: "North Wales, PA 19454",
-  email: "priyadobariya00@gmail.com",
+  email: "dobariyap305@gmail.com",
   phone: "+1 (267) 342-5377",
   linkedin: "https://www.linkedin.com/in/priya-dobariya",
-  resumePdf: "", // optional: link to your resume if hosted
+  gitHub: "https://github.com/priya0030",
   summary: `Android & Flutter developer with a strong track record shipping high‑quality mobile apps, leading cross‑platform transitions, and mentoring teams. Currently completing an M.S. in Computer Science at UAB.`,
 };
 
@@ -54,15 +54,48 @@ export const experience = [
 export const projects = [
   {
     title: "Math Quest — Gamified Math Learning",
-    brief: "Multiplayer math app for kids (6–14) with dynamic difficulty and real‑time scoring.",
+    brief: "Multiplayer math app for kids (6–14) with dynamic difficulty and real-time scoring.",
     details: [
-      "Two‑player head‑to‑head quizzes, instant feedback, scoreboard tracking.",
+      "Two-player head-to-head quizzes, instant feedback, scoreboard tracking.",
       "Difficulty modes (Easy → Complex), operations (+ − × ÷) stored in PaperDB.",
       "Responsive UI, Help screen, iterative gameplay/UI improvements.",
       "Planned Firebase Crashlytics integration for error tracking."
     ],
     tech: ["Android (Java, XML)", "PaperDB", "Gradle", "GitHub"],
-    links: []
+    links: ["https://github.com/priya0030/Math-Quest"]
+  },
+  {
+    title: "Fetch Data Display — Coding Challenge",
+    brief: "Native Android app that fetches and displays data from JSON endpoint.",
+    details: [
+      "Grouped and sorted items by listId.",
+      "Filtered out blank/null names for cleaner UI.",
+      "Followed Fetch Rewards coding challenge requirements."
+    ],
+    tech: ["Android (Java, XML)", "REST API", "JSON", "Gradle"],
+    links: ["https://github.com/priya0030/Fetch_Data_Display"]
+  },
+  {
+    title: "Task Management App",
+    brief: "Simple Android task manager with CRUD operations.",
+    details: [
+      "Add, update, and delete tasks with a clean UI.",
+      "Used local storage for persisting data.",
+      "Designed user-friendly interface for managing tasks efficiently."
+    ],
+    tech: ["Android (Java, XML)", "SQLite", "Gradle"],
+    links: ["https://github.com/priya0030/Task-Management"]
+  },
+  {
+    title: "Personal Portfolio Website",
+    brief: "Responsive portfolio website to showcase projects and skills.",
+    details: [
+      "Built with React and styled using CSS/Tailwind.",
+      "Interactive hero section with typewriter animation.",
+      "Sections for About, Skills, Projects, and Contact."
+    ],
+    tech: ["React", "JavaScript", "Tailwind CSS", "Vite"],
+    links: ["https://github.com/priya0030/priya-portfolio"]
   },
   {
     title: "Recipe App — Multinational Cuisine",

@@ -8,11 +8,6 @@
   --card: #161a33;
   --border: #23264a;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
-
-  /* 🔮 Hero Orbit Colors */
-  --orbitGradient: conic-gradient(from 180deg, #ff6ec4, #7873f5, #12fff7, #ff6ec4);
-  --orbitGradientAlt: conic-gradient(from 180deg, #12fff7, #6a82fb, #fc5c7d, #12fff7);
-  --orbitDotColor: #ff6ec4;
 }
 
 :root.light {
@@ -25,11 +20,6 @@
   --card: #ffffff;
   --border: #e8e9f6;
   --shadow: 0 8px 20px rgba(18, 22, 66, .08);
-
-  /* 🔮 Hero Orbit Colors (brighter for light theme) */
-  --orbitGradient: conic-gradient(from 180deg, #ff8ad4, #9b89ff, #4affff, #ff8ad4);
-  --orbitGradientAlt: conic-gradient(from 180deg, #4affff, #8fa3ff, #ff7a9e, #4affff);
-  --orbitDotColor: #ff8ad4;
 }
 
 
@@ -40,6 +30,9 @@ body {
   font-family: 'Libertinus Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   color: var(--text);
   background: radial-gradient(1200px 900px at 80% -10%, rgba(108,92,231,.25), transparent 60%), var(--bg);
+  margin: 0; /* remove any default body margin */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -89,8 +82,20 @@ img { max-width: 100%; display: block; }
 
 .hero {
   padding: 96px 0 48px; display: grid; gap: 22px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
-.hero h1 { font-size: clamp(32px, 4.5vw, 56px); margin: 0; line-height: 1.05; }
+.hero-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+  padding: 2rem;
+}
+.hero h1 { font-size: clamp(32px, 2.5vw, 56px); margin: 0; line-height: 1.05; }
 .hero p { color: var(--muted); font-size: 18px; margin: 0; }
 .hero .cta { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
 .button {
@@ -203,68 +208,276 @@ img { max-width: 100%; display: block; }
   filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.3));
 }
 
-.orbit-ring-1 {
-          animation: rotate 8s linear infinite;
-        }
-        
-        .orbit-ring-2 {
-          animation: rotate 12s linear infinite reverse;
-        }
-        
-        .orbit-ring-3 {
-          animation: rotate 10s linear infinite;
-        }
-        
-        .orbit-ring-4 {
-          animation: rotate 14s linear infinite reverse;
-        }
+.aurora-bg {
+  background: radial-gradient(ellipse at top left, rgba(0, 255, 200, 0.3), transparent),
+              radial-gradient(ellipse at bottom right, rgba(0, 150, 255, 0.3), transparent),
+              radial-gradient(ellipse at top right, rgba(200, 0, 255, 0.2), transparent);
+  background-blend-mode: screen;
+  animation: aurora 10s ease-in-out infinite alternate;
+}
 
-        .dot-1 {
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%) translateY(-96px);
-        }
-        
-        .dot-2 {
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%) translateY(-112px);
-        }
-        
-        .dot-3 {
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%) translateY(-128px);
-        }
-        
-        .dot-4 {
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%) translateY(-144px);
-        }
+@keyframes aurora {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    filter: blur(40px);
+  }
+  50% {
+    transform: translateY(-40px) translateX(30px) scale(1.1);
+    filter: blur(60px);
+  }
+  100% {
+    transform: translateY(20px) translateX(-20px) scale(1.05);
+    filter: blur(50px);
+  }
+}
 
-        @keyframes rotate {
-          from {
-            transform: translate(-50%, -50%) rotate(0deg);
-          }
-          to {
-            transform: translate(-50%, -50%) rotate(360deg);
-          }
-        }
+/* SAFE FIXES: prevent horizontal overflow and force left-right hero layout */
+html, body {
+  overflow-x: hidden; /* hide accidental horizontal overflow */
+}
 
-        /* Smooth trail animation */
-        .trail-segment-1,
-        .trail-segment-2,
-        .trail-segment-3,
-        .trail-segment-4 {
-          animation: pulse 2s ease-in-out infinite;
-        }
+body {
+  margin: 0; /* remove any default body margin */
+}
 
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.8;
-          }
-          50% {
-            opacity: 0.4;
-          }
-        }
+/* Prevent 100vw from creating extra horizontal space (use .full-viewport where needed) */
+.full-viewport { width: 100%; }
+
+/* Hero layout: force left-right and prevent children from causing overflow */
+.hero {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Allow flex children to shrink correctly instead of forcing overflow */
+.hero-text,
+.hero-profile {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Decorative backgrounds shouldn't affect document flow */
+.aurora-bg,
+.hero-bg,
+.floating-logos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* If you need a centered wrapper that doesn't overflow */
+.container-center {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Helpful utility if any children use transform/blur that extends bounds */
+.no-scrollbar-overflow {
+  overflow-x: hidden;
+}
+
+/* Responsive: switch hero to column on small screens and fix nav overlap */
+@media (max-width: 720px) {
+  /* Make the nav a multi-line, non-overlapping bar */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    padding: 8px 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    height: auto;
+    padding: 6px 0;
+  }
+
+  .brand { flex: 0 0 auto; }
+
+  /* Make links wrap beneath the brand and be horizontally scrollable if needed */
+  .nav-links {
+    order: 2;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    padding: 6px 0 0 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links a {
+    flex: 0 0 auto;
+    padding: 8px 10px;
+  }
+
+  /* Keep the toggle/button visible and aligned right on its own row if needed */
+  .theme-toggle {
+    order: 3;
+    flex: 0 0 auto;
+  }
+
+  /* Hero: stack content vertically */
+  .hero {
+    padding: 32px 0 24px;
+  }
+
+  .hero-main {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  /* Ensure children can shrink to avoid overflow from long text or images */
+  .hero-text,
+  .hero-profile {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .hero-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  /* Constrain profile image size on small screens */
+  .hero-profile img {
+    max-width: 180px;
+    width: 40%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .hero h1 { font-size: clamp(24px, 6vw, 34px); text-align: left; }
+  .hero p { font-size: 16px; text-align: left; }
+
+  .hero .cta { justify-content: flex-start; width: 100%; }
+
+  /* Avoid accidental horizontal scrolling from decorative absolute elements */
+  .aurora-bg,
+  .hero-bg,
+  .floating-logos {
+    left: 0;
+    right: 0;
+    overflow: visible;
+  }
+}
+
+/* Optional: tighten layout for medium screens */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .hero-main { padding: 1.5rem; gap: 1.25rem; }
+  .hero-profile img { max-width: 220px; width: auto; }
+}
+
+/* Mobile drawer + hamburger styles */
+.hamburger {
+  display: none;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Drawer backdrop */
+.drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 20, 0.45);
+  z-index: 60;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+.drawer-backdrop.visible {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Drawer panel */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(86%, 320px);
+  height: 100vh;
+  background: var(--card);
+  border-left: 1px solid var(--border);
+  box-shadow: 0 40px 80px rgba(2,6,23,0.6);
+  transform: translateX(100%);
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+}
+.drawer.open {
+  transform: translateX(0);
+}
+.drawer-inner { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.drawer-close {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+.drawer-close:hover { color: var(--text); }
+
+/* Drawer nav links */
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+.drawer-nav a {
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  display: inline-block;
+}
+.drawer-nav a:hover { color: var(--text); background: var(--bg-soft); }
+
+/* Mobile rules: swap links for hamburger + drawer */
+@media (max-width: 720px) {
+  .nav-links { display: none; } /* hide existing link row */
+  .hamburger { display: inline-flex; align-items:center; gap:8px; }
+  .theme-toggle { order: 4; } /* keep theme toggle visible, adjust order if needed */
+
+  /* ensure nav-inner uses wrap so brand + hamburger + theme align */
+  .nav-inner { flex-wrap: nowrap; gap: 8px; }
+
+  /* make container inside drawer have less horizontal padding on very small screens */
+  .drawer-inner.container { padding-left: 0; padding-right: 0; }
+}

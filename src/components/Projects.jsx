@@ -16,7 +16,7 @@ export default function Projects() {
               {p.tech.map((t,i)=> <span className="tag" key={i}>{t}</span>)}
             </div>
             {p.links?.length ? (
-              <div style={{marginTop:12, display:'flex', gap:10, flexWrap:'wrap'}}>
+              <div style={{marginTop:12, display:'flex', alignSelf:'right', gap:10, flexWrap:'wrap'}}>
                 {p.links.map((l, i)=> <a className="button" key={i} href={l.href} target="_blank" rel="noreferrer">🔗 {l.label}</a>)}
               </div>
             ) : null}

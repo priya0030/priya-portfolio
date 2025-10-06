@@ -1,17 +1,24 @@
 .hero {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 3rem 6rem;
-  background: var(--bg, #0f1222);
-  color: var(--text, #fff);
-  gap: 4rem;
+  width: 100vw;
+  
 }
+
+  .hero-main{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+  }
+
 
 .hero-text {
   flex: 1;
-  max-width: 50%;
+  max-width: 60%;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 .hero-text h2 {
@@ -21,13 +28,14 @@
 }
 
 .hero-text h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 .hero-text p {
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  padding-top: 0.5vw;
+  padding-bottom: 1vw;
   color: var(--muted, #a8a8c5);
 }
 
@@ -71,12 +79,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 40%;
 }
 
 .profile-wrapper {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 350px;
+  height: 350px;
 }
 
 .profile-pic {
@@ -89,46 +98,6 @@
   box-shadow: 0 0 20px rgba(108, 92, 231, 0.4);
 }
 
-/* Rings */
-.ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  animation: rotate 12s linear infinite;
-}
-
-.ring1 {
-  width: 280px;
-  height: 280px;
-  border-image: linear-gradient(90deg, #6c5ce7, transparent) 1;
-}
-
-.ring2 {
-  width: 320px;
-  height: 320px;
-  border-image: linear-gradient(90deg, #a29bfe, transparent) 1;
-  animation-duration: 18s;
-}
-
-.ring3 {
-  width: 360px;
-  height: 360px;
-  border-image: linear-gradient(90deg, #00cec9, transparent) 1;
-  animation-duration: 24s;
-}
-
-@keyframes rotate {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -142,3 +111,45 @@
     max-width: 100%;
   }
 }
+
+
+.aurora-bg {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at bottom center, rgba(0, 255, 200, 0.35), transparent),
+              radial-gradient(ellipse at bottom right, rgba(0, 150, 255, 0.35), transparent),
+              radial-gradient(ellipse at bottom left, rgba(255, 0, 200, 0.25), transparent);
+  background-blend-mode: screen;
+  animation: auroraMove 16s ease-in-out infinite alternate,
+             auroraHue 30s linear infinite;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+  rotate: 180deg;
+
+  /* 👇 Wave shape rising from bottom */
+  clip-path: ellipse(200% 90% at 40% 100%);
+}
+
+@keyframes auroraMove {
+  0%   { transform: translateY(0px) translateX(0px) scale(1); }
+  50%  { transform: translateY(-40px) translateX(30px) scale(1.1); }
+  100% { transform: translateY(20px) translateX(-20px) scale(1.05); }
+}
+
+@keyframes auroraHue {
+  0%   { filter: hue-rotate(0deg) blur(80px); }
+  50%  { filter: hue-rotate(180deg) blur(90px); }
+  100% { filter: hue-rotate(360deg) blur(80px); }
+}
+
+
+/* Ensure content is above background */
+.hero, .hero-main, .hero-text, .hero-profile {
+  position: relative;
+  z-index: 2;
+}
+
+

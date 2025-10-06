@@ -22,7 +22,8 @@
     "react-tsparticles": "^2.12.2",
     "react-typed": "^2.0.12",
     "three": "^0.179.1",
-    "tsparticles": "^3.9.1"
+    "tsparticles": "^3.9.1",
+    "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
