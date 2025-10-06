@@ -12,14 +12,40 @@ export default function Projects() {
             <ul style={{paddingLeft:'1.1rem', margin:'8px 0'}}>
               {p.details.map((d,i)=> <li key={i}>{d}</li>)}
             </ul>
-            <div className="tags">
-              {p.tech.map((t,i)=> <span className="tag" key={i}>{t}</span>)}
-            </div>
-            {p.links?.length ? (
-              <div style={{marginTop:12, display:'flex', alignSelf:'right', gap:10, flexWrap:'wrap'}}>
-                {p.links.map((l, i)=> <a className="button" key={i} href={l.href} target="_blank" rel="noreferrer">🔗 {l.label}</a>)}
+
+            { /* replaced separate tags + links blocks with a single flex row */ }
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginTop:12, gap:12}}>
+              <div className="tags" style={{display:'flex', gap:8, flexWrap:'wrap'}}>
+                {p.tech.map((t,i)=> <span className="tag" key={i}>{t}</span>)}
               </div>
-            ) : null}
+
+              {p.links?.length ? (
+                <div style={{display:'flex', gap:10, alignItems:'center', flexWrap:'wrap'}}>
+                  {p.links.map((l, i)=> {
+  const raw = typeof l === 'string' ? l : (l.href ?? l.url ?? '');
+  const resolved = raw ? ( /^(https?:)?\/\//i.test(raw) ? raw : `https://${raw}` ) : '';
+  console.log('project link raw:', l, 'resolved:', resolved);
+  return (
+    <a
+      className="button"
+      key={i}
+      href={resolved || '#'}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={typeof l === 'string' ? `Open project link ${i+1}` : (l.label ?? l.name ?? `Open project link ${i+1}`)}
+      onClick={(e) => {
+        if (!resolved) e.preventDefault(); // don't navigate if we couldn't resolve a URL
+      }}
+      style={{cursor:'pointer'}}
+    >
+      🔗
+    </a>
+  );
+})}
+                </div>
+              ) : null}
+            </div>
+
           </article>
         ))}
       </div>

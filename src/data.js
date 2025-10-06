@@ -62,28 +62,18 @@ export const projects = [
       "Planned Firebase Crashlytics integration for error tracking."
     ],
     tech: ["Android (Java, XML)", "PaperDB", "Gradle", "GitHub"],
-    links: ["https://github.com/priya0030/Math-Quest"]
+    links: ["https://github.com/priya0030/Math_Quest"]
   },
   {
-    title: "Fetch Data Display — Coding Challenge",
-    brief: "Native Android app that fetches and displays data from JSON endpoint.",
-    details: [
-      "Grouped and sorted items by listId.",
-      "Filtered out blank/null names for cleaner UI.",
-      "Followed Fetch Rewards coding challenge requirements."
-    ],
-    tech: ["Android (Java, XML)", "REST API", "JSON", "Gradle"],
-    links: ["https://github.com/priya0030/Fetch_Data_Display"]
-  },
-  {
-    title: "Task Management App",
+    title: "Task Manager — Android To-Do App",
     brief: "Simple Android task manager with CRUD operations.",
     details: [
-      "Add, update, and delete tasks with a clean UI.",
-      "Used local storage for persisting data.",
-      "Designed user-friendly interface for managing tasks efficiently."
+      "Built an Android task manager with full CRUD functionality and Room Database for offline storage.",
+      "Added priority levels and color indicators for better task organization.",
+      "Implemented category-based filters and real-time updates with LiveData.",
+      "Designed a clean, responsive UI following MVVM architecture and Material Design."
     ],
-    tech: ["Android (Java, XML)", "SQLite", "Gradle"],
+    tech: ["Android (Java, XML)", "Room DB", "MVVM", "GitHub"],
     links: ["https://github.com/priya0030/Task-Management"]
   },
   {
