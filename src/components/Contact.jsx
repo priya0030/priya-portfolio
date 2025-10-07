@@ -1,4 +1,3 @@
-// ...existing code...
 // This file should be moved to 'components' folder for consistent casing.
 import { profile } from "../data";
 import Section from "./Section";
@@ -20,6 +19,12 @@ export default function Contact() {
             🔗 LinkedIn
           </a>
         </div>
+        {profile.phone && (
+          <div className="contact-row">
+            <strong>Phone:</strong>
+            <a href={`tel:${profile.phone}`}>{profile.phone}</a>
+          </div>
+        )}
       </div>
     </Section>
   );
