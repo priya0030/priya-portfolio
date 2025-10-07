@@ -1,9 +1,8 @@
 export const profile = {
   name: "Priya Dobariya",
-  tagline: "Senior Android & Flutter Developer • M.S. CS @ UAB",
+  tagline: "Android & Flutter Developer • M.S. CS @ UAB",
   location: "North Wales, PA 19454",
   email: "dobariyap305@gmail.com",
-  phone: "+1 (267) 342-5377",
   linkedin: "https://www.linkedin.com/in/priya-dobariya",
   gitHub: "https://github.com/priya0030",
   summary: `Android & Flutter developer with a strong track record shipping high‑quality mobile apps, leading cross‑platform transitions, and mentoring teams. Currently completing an M.S. in Computer Science at UAB.`,
@@ -21,7 +20,7 @@ export const nav = [
 
 export const experience = [
   {
-    role: "Senior Android Developer",
+    role: "Senior Android Developer",ss
     org: "Quad SoftTech",
     location: "Surat, Gujarat",
     dates: "July 2022 – July 2023",

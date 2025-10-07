@@ -19,9 +19,6 @@ export default function Contact() {
           <a className="button" href={profile.linkedin} target="_blank" rel="noreferrer">
             🔗 LinkedIn
           </a>
-          <a className="button" href={`tel:${profile.phone.replace(/[^\d+]/g,'')}`}>
-            📞 Call
-          </a>
         </div>
       </div>
     </Section>

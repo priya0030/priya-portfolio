@@ -33,15 +33,16 @@ export default function Hero() {
             <Typewriter
               options={{
                 strings: [
-                  "Mobile App Developer 📱",
-                  "Flutter Enthusiast 🚀",
-                  "Android Specialist 💡",
-                  "Data Science Explorer 🤖",
+                  "Mobile App Developer \u{1F4F1}",  // 📱
+                  "Flutter Enthusiast \u{1F680}",    // 🚀
+                  "Android Specialist \u{1F4A1}",    // 💡
+                  "Data Science Explorer \u{1F916}", // 🤖
                 ],
                 autoStart: true,
                 loop: true,
                 delay: 75,
                 deleteSpeed: 40,
+                startDelay: 300,
               }}
             />
           </h1>
