@@ -3,6 +3,19 @@ import { nav, profile } from "../data";
 console.log("Nav data:", nav);
 console.log("Profile data:", profile);
 
+import { User, GraduationCap, Briefcase, Code, FolderGit2, Award, Mail, FileText } from "lucide-react";
+
+const iconMap = {
+  about: <User size={20} strokeWidth={1.7} />,
+  education: <GraduationCap size={20} strokeWidth={1.7} />,
+  experience: <Briefcase size={20} strokeWidth={1.7} />,
+  skills: <Code size={20} strokeWidth={1.7} />,
+  projects: <FolderGit2 size={20} strokeWidth={1.7} />,
+  certifications: <Award size={20} strokeWidth={1.7} />,
+  contact: <Mail size={20} strokeWidth={1.7} />,
+  resume: <FileText size={20} strokeWidth={1.7} />,
+};
+
 export default function Navbar({ onToggleTheme }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -99,7 +112,6 @@ export default function Navbar({ onToggleTheme }) {
       <div className={`drawer-backdrop ${drawerOpen ? "visible" : ""}`} onClick={() => setDrawerOpen(false)} />
       <aside className={`drawer ${drawerOpen ? "open" : ""}`} aria-hidden={!drawerOpen}>
         <div className="drawer-inner container">
-          <button className="drawer-close" aria-label="Close navigation" onClick={() => setDrawerOpen(false)}>✕</button>
           <nav className="drawer-nav">
             {nav.map((n) => (
               <a
@@ -111,11 +123,18 @@ export default function Navbar({ onToggleTheme }) {
                   setDrawerOpen(false);
                 }}
               >
+                <span className="drawer-icon" aria-hidden>{iconMap[n.id] ?? fallbackIcon}</span>
                 {n.label}
               </a>
             ))}
-            {profile.resumePdf && (
-              <a href={profile.resumePdf} target="_blank" rel="noreferrer" onClick={() => setDrawerOpen(false)}>
+            {profile.resumePdf ? (
+              <a href={profile.resumePdf} target="_blank" rel="noopener noreferrer" onClick={() => setDrawerOpen(false)}>
+                <span className="drawer-icon" aria-hidden>{iconMap['resume']}</span>
+                Resume
+              </a>
+            ) : (
+              <a href="/Priya_Resume.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setDrawerOpen(false)}>
+                <span className="drawer-icon" aria-hidden>{iconMap['resume']}</span>
                 Resume
               </a>
             )}

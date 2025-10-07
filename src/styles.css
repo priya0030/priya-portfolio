@@ -294,10 +294,10 @@ body {
 @media (max-width: 720px) {
   /* Make the nav a multi-line, non-overlapping bar */
   .nav {
-    position: sticky;
+    position: right;
     top: 0;
     z-index: 9999;
-    padding: 8px 0;
+    padding: 2px 0;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     border-bottom: 1px solid var(--border);
   }
@@ -335,46 +335,51 @@ body {
     flex: 0 0 auto;
   }
 
-  /* Hero: stack content vertically */
+  /* Hero: stack content vertically and center items/text */
   .hero {
     padding: 32px 0 24px;
   }
 
   .hero-main {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;   /* center children horizontally */
     justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 0.6rem;
+    padding: 0.5rem;
   }
 
-  /* Ensure children can shrink to avoid overflow from long text or images */
+  /* Ensure hero text and profile center and can shrink */
   .hero-text,
   .hero-profile {
     flex: 1 1 100%;
     min-width: 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;    /* center text inside */
   }
 
   .hero-profile {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 4px;
+    padding-top: 20px; 
   }
 
-  /* Constrain profile image size on small screens */
   .hero-profile img {
-    max-width: 180px;
-    width: 40%;
+    max-width: 220px;
+    width: 55%;
     height: auto;
-    border-radius: 12px;
+    border-radius: 110px;
+    margin: 0 auto;
   }
 
-  .hero h1 { font-size: clamp(24px, 6vw, 34px); text-align: left; }
-  .hero p { font-size: 16px; text-align: left; }
+  .hero h1 { font-size: clamp(24px, 6vw, 34px); text-align: center; margin: 2px; }
+  .hero p { font-size: 16px; text-align: center; margin-bottom: 8px; margin-top: 2px; }
 
-  .hero .cta { justify-content: flex-start; width: 100%; }
+  /* center CTA buttons */
+  .hero .cta { justify-content: center; width: 100%;  }
 
   /* Avoid accidental horizontal scrolling from decorative absolute elements */
   .aurora-bg,
@@ -384,6 +389,7 @@ body {
     right: 0;
     overflow: visible;
   }
+
 }
 
 /* Optional: tighten layout for medium screens */
@@ -392,92 +398,157 @@ body {
   .hero-profile img { max-width: 220px; width: auto; }
 }
 
-/* Mobile drawer + hamburger styles */
+/* ==== MOBILE DRAWER + HAMBURGER ==== */
 .hamburger {
   display: none;
   border: 1px solid var(--border);
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   color: var(--text);
   padding: 8px 10px;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
 }
 
-/* Drawer backdrop */
+.hamburger:hover {
+  background: rgba(108, 92, 231, 0.2);
+  border-color: var(--brand, #6c5ce7);
+  transform: scale(1.05);
+}
+
+/* ==== Drawer Backdrop ==== */
 .drawer-backdrop {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(5, 8, 20, 0.45);
+  background: rgba(10, 10, 25, 0.55);
+  backdrop-filter: blur(6px);
   z-index: 60;
   opacity: 0;
-  transition: opacity 180ms ease;
   pointer-events: none;
+  transition: opacity 250ms ease;
 }
+
 .drawer-backdrop.visible {
-  display: block;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Drawer panel */
+/* ==== Drawer Panel ==== */
 .drawer {
   position: fixed;
   top: 0;
   right: 0;
   width: min(86%, 320px);
   height: 100vh;
-  background: var(--card);
+  /* use the card color from the theme so drawer matches light/dark modes */
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   border-left: 1px solid var(--border);
-  box-shadow: 0 40px 80px rgba(2,6,23,0.6);
+  backdrop-filter: blur(16px);
+  box-shadow: -10px 0 25px rgba(0, 0, 0, 0.6),
+              inset 0 0 40px rgba(108, 92, 231, 0.08);
   transform: translateX(100%);
-  transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+  transition: transform 300ms cubic-bezier(0.25, 1, 0.3, 1);
   z-index: 70;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 20px;
+  padding: 24px 20px;
+  color: var(--text);
 }
+
 .drawer.open {
   transform: translateX(0);
 }
-.drawer-inner { display: flex; flex-direction: column; gap: 12px; height: 100%; }
-.drawer-close {
-  align-self: flex-end;
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  font-size: 18px;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-}
-.drawer-close:hover { color: var(--text); }
 
-/* Drawer nav links */
+/* ensure controls inherit theme text color for legibility in both themes */
+.drawer .drawer-close,
+.drawer .drawer-nav a {
+  color: var(--text);
+  opacity: 0.95;
+}
+
+/* stronger contrast on hover/focus (keep same transform behavior) */
+.drawer .drawer-close:hover,
+.drawer .drawer-nav a:hover,
+.drawer .drawer-nav a:focus {
+  color: var(--text);
+  opacity: 1;
+  outline: none;
+}
+
+/* ==== Drawer Nav Links ==== */
 .drawer-nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 6px;
+  gap: 12px;
+  margin-top: 20px;
 }
+
 .drawer-nav a {
-  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
   border-radius: 8px;
+  color: var(--text);
+}
+
+.drawer-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--muted);
-  display: inline-block;
+  flex-shrink: 0;
 }
-.drawer-nav a:hover { color: var(--text); background: var(--bg-soft); }
 
-/* Mobile rules: swap links for hamburger + drawer */
+.drawer-nav a:hover .drawer-icon,
+.drawer-nav a:focus .drawer-icon {
+  color: var(--text);
+}
+
+/* ...existing code... */
+
+/* ==== Mobile Layout Rules ==== */
 @media (max-width: 720px) {
-  .nav-links { display: none; } /* hide existing link row */
-  .hamburger { display: inline-flex; align-items:center; gap:8px; }
-  .theme-toggle { order: 4; } /* keep theme toggle visible, adjust order if needed */
+  .nav-links { display: none; }
 
-  /* ensure nav-inner uses wrap so brand + hamburger + theme align */
-  .nav-inner { flex-wrap: nowrap; gap: 8px; }
+  .hamburger {
+    display: flex;
+    align-items: right;
+    gap: 4px;
+  }
 
-  /* make container inside drawer have less horizontal padding on very small screens */
-  .drawer-inner.container { padding-left: 0; padding-right: 0; }
+  .nav-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .drawer-inner.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
+
+.drawer-nav a {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.drawer.open .drawer-nav a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.drawer.open .drawer-nav a:nth-child(1) { transition-delay: 0.1s; }
+.drawer.open .drawer-nav a:nth-child(2) { transition-delay: 0.2s; }
+.drawer.open .drawer-nav a:nth-child(3) { transition-delay: 0.3s; }
+.drawer.open .drawer-nav a:nth-child(4) { transition-delay: 0.4s; }
+.drawer.open .drawer-nav a:nth-child(5) { transition-delay: 0.5s; }
+.drawer.open .drawer-nav a:nth-child(6) { transition-delay: 0.6s; }
+
+
+
